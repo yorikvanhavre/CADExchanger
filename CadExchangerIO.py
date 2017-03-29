@@ -51,45 +51,45 @@ def registerExtensions():
     if not converter:
         return
     if preferences.GetBool("ImportStep",False):
-        FreeCAD.addImportType("STEP (CadExchanger) (*.stp, *.step)","CadExchanger")
+        FreeCAD.addImportType("STEP (CadExchanger) (*.stp, *.step)","CadExchangerIO")
     if preferences.GetBool("ExportStep",False):
-        FreeCAD.addExportType("STEP (CadExchanger) (*.stp, *.step)","CadExchanger")
+        FreeCAD.addExportType("STEP (CadExchanger) (*.stp, *.step)","CadExchangerIO")
     if preferences.GetBool("ImportIges",False):
-        FreeCAD.addImportType("IGES (CadExchanger) (*.igs, *.iges)","CadExchanger")
+        FreeCAD.addImportType("IGES (CadExchanger) (*.igs, *.iges)","CadExchangerIO")
     if preferences.GetBool("ExportIges",False):
-        FreeCAD.addExportType("IGES (CadExchanger) (*.igs, *.iges)","CadExchanger")
+        FreeCAD.addExportType("IGES (CadExchanger) (*.igs, *.iges)","CadExchangerIO")
     if preferences.GetBool("ImportAcis",False):
-        FreeCAD.addImportType("ACIS/SAT (CadExchanger) (*.sat)","CadExchanger")
+        FreeCAD.addImportType("ACIS/SAT (CadExchanger) (*.sat)","CadExchangerIO")
     if preferences.GetBool("ExportAcis",False):
-        FreeCAD.addExportType("ACIS/SAT (CadExchanger) (*.sat)","CadExchanger")
+        FreeCAD.addExportType("ACIS/SAT (CadExchanger) (*.sat)","CadExchangerIO")
     if preferences.GetBool("ImportParasolid",False):
-        FreeCAD.addImportType("Parasolid-XT (CadExchanger) (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)","CadExchanger")
+        FreeCAD.addImportType("Parasolid-XT (CadExchanger) (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)","CadExchangerIO")
     if preferences.GetBool("ExportParasolid",False):
-        FreeCAD.addExportType("Parasolid-XT (CadExchanger) (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)","CadExchanger")
+        FreeCAD.addExportType("Parasolid-XT (CadExchanger) (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)","CadExchangerIO")
     if preferences.GetBool("ImportJt",False):
-        FreeCAD.addImportType("JT (CadExchanger) (*.jt)","CadExchanger")
+        FreeCAD.addImportType("JT (CadExchanger) (*.jt)","CadExchangerIO")
     if preferences.GetBool("ExportJt",False):
-        FreeCAD.addExportType("JT (CadExchanger) (*.jt)","CadExchanger")
+        FreeCAD.addExportType("JT (CadExchanger) (*.jt)","CadExchangerIO")
     if preferences.GetBool("ImportRhino",False):
-        FreeCAD.addImportType("Rhino (CadExchanger) (*.3dm)","CadExchanger")
+        FreeCAD.addImportType("Rhino (CadExchanger) (*.3dm)","CadExchangerIO")
     if preferences.GetBool("ExportRhino",False):
-        FreeCAD.addExportType("Rhino (CadExchanger) (*.3dm)","CadExchanger")
+        FreeCAD.addExportType("Rhino (CadExchanger) (*.3dm)","CadExchangerIO")
     if preferences.GetBool("ImportObj",False):
-        FreeCAD.addImportType("Wavefromt OBJ (CadExchanger) (*.obj)","CadExchanger")
+        FreeCAD.addImportType("Wavefromt OBJ (CadExchanger) (*.obj)","CadExchangerIO")
     if preferences.GetBool("ExportObj",False):
-        FreeCAD.addExportType("Wavefront OBJ (CadExchanger) (*.obj)","CadExchanger")
+        FreeCAD.addExportType("Wavefront OBJ (CadExchanger) (*.obj)","CadExchangerIO")
     if preferences.GetBool("ImportStl",False):
-        FreeCAD.addImportType("STL (CadExchanger) (*.stl)","CadExchanger")
+        FreeCAD.addImportType("STL (CadExchanger) (*.stl)","CadExchangerIO")
     if preferences.GetBool("ExportStl",False):
-        FreeCAD.addExportType("STL (CadExchanger) (*.stl)","CadExchanger")
+        FreeCAD.addExportType("STL (CadExchanger) (*.stl)","CadExchangerIO")
 #    if preferences.GetBool("ImportVrml",False):
-#        FreeCAD.addImportType("VRML (CadExchanger) (*.wrl)","CadExchanger")
+#        FreeCAD.addImportType("VRML (CadExchanger) (*.wrl)","CadExchangerIO")
     if preferences.GetBool("ExportVrml",False):
-        FreeCAD.addExportType("VRML (CadExchanger) (*.wrl)","CadExchanger")
+        FreeCAD.addExportType("VRML (CadExchanger) (*.wrl)","CadExchangerIO")
 #    if preferences.GetBool("ImportX3d",False):
-#        FreeCAD.addImportType("X3D (CadExchanger) (*.x3d)","CadExchanger")
+#        FreeCAD.addImportType("X3D (CadExchanger) (*.x3d)","CadExchangerIO")
     if preferences.GetBool("ExportX3d",False):
-        FreeCAD.addExportType("X3D (CadExchanger) (*.x3d)","CadExchanger")
+        FreeCAD.addExportType("X3D (CadExchanger) (*.x3d)","CadExchangerIO")
 
 
 
@@ -164,7 +164,9 @@ def insert(filename,docname):
         doc = FreeCAD.newDocument(docname)
     FreeCAD.ActiveDocument = doc
     tempname = tempfile.mkstemp(suffix=".brep")[1]
-    result = subprocess.call(converter + " -i " + filename + " -e " + tempname)
+    exstr = [converter, " -i ", filename, " -e ", tempname]
+    print "executing "+" ".join(exstr)
+    result = subprocess.call(exstr)
     if not result:
         FreeCAD.PrintError(translate("CadExchanger","Error while running CadExchanger\n"))
         return
@@ -190,7 +192,9 @@ def export(exportList,filename):
     import Part
     tempname = tempfile.mkstemp(suffix=".brep")[1]
     Part.export(exportList,tempname)
-    result = subprocess.call(converter + " -i " + tempname + " -e " + filename)
+    exstr = [converter, " -i ", tempname, " -e ", filename]
+    print "executing "+" ".join(exstr)
+    result = subprocess.call(exstr)
     if not result:
         FreeCAD.PrintError(translate("CadExchanger","Error while running CadExchanger\n"))
         return
