@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
+ <class>PrefWidget</class>
  <widget class="QWidget" name="PrefWidget">
   <property name="geometry">
    <rect>
@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CadExchanger</string>
+   <string>CAD Exchanger</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label_14">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The options below will enable a series of file formats supported by the &lt;a href=&quot;http://cadexchanger.com/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;CAD&amp;nbsp;Exchanger&lt;/span&gt;&lt;/a&gt; application. You need to have CAD Exchanger installed on this computer for the settings below to take effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The options below will enable a series of file formats supported by the &lt;a href=&quot;http://cadexchanger.com/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;CAD Exchanger&lt;/span&gt;&lt;/a&gt; application. You need to have CAD Exchanger installed on this computer for the settings below to take effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -43,7 +43,7 @@
          <cstring>ConverterPath</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -65,7 +65,7 @@
          <cstring>ExportObj</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -78,7 +78,7 @@
          <cstring>ImportAcis</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -125,7 +125,7 @@
          <cstring>ExportVrml</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -138,7 +138,7 @@
          <cstring>ImportParasolid</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -165,7 +165,7 @@
          <cstring>ExportRhino</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -185,7 +185,7 @@
          <cstring>ExportX3d</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -198,7 +198,7 @@
          <cstring>ImportStep</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -211,7 +211,7 @@
          <cstring>ImportIges</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -224,7 +224,7 @@
          <cstring>ExportIges</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -258,7 +258,7 @@
          <cstring>ExportStep</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -271,7 +271,7 @@
          <cstring>ExportParasolid</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -291,7 +291,7 @@
          <cstring>ImportStl</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -304,7 +304,7 @@
          <cstring>ExportStl</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -317,7 +317,7 @@
          <cstring>ImportJt</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -330,7 +330,7 @@
          <cstring>ExportJt</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -343,7 +343,7 @@
          <cstring>ImportRhino</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -356,7 +356,20 @@
          <cstring>ImportObj</cstring>
         </property>
         <property name="prefPath" stdset="0">
-         <cstring>Mod/CadExchanger</cstring>
+         <cstring>Mod/CADExchanger</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="Gui::PrefCheckBox" name="checkBox_17">
+        <property name="text">
+         <string>Import</string>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>ImportVrml</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>

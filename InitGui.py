@@ -20,5 +20,5 @@
 #*                                                                         *
 #***************************************************************************
 
-import CadExchangerIO
-CadExchangerIO.addPreferencePage()
+import CADExchangerIO
+CADExchangerIO.addPreferencePage()
