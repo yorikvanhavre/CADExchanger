@@ -4,7 +4,7 @@ This addons allows [FreeCAD](http//www.freecadweb.org) to import and export to s
 
 CADExchanger is a paid application, it must be purchased on their website (a free 30-day evaluation is available). It allows to import and export to several commercial file formats into/from FreeCAD.
 
-This addon can be installed via FreeCAD's addon manager, available in FreeCAD in version 0.17 or via the (addons installer macro)[https://github.com/FreeCAD/FreeCAD-addons] for older versions.
+This addon can be installed via FreeCAD's addon manager, available in FreeCAD in version 0.17 or via the [addons installer macro](https://github.com/FreeCAD/FreeCAD-addons) for older versions.
 
 It can also simply be installed manually by downloading and copying the contents of this repository into a "CADExchanger" folder inside your FreeCAD/Mod directory.
 
