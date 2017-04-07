@@ -1,4 +1,4 @@
-## CADExchanger addon for FreeCAD
+## CAD Exchanger addon for FreeCAD
 
 This addons allows [FreeCAD](http//www.freecadweb.org) to import and export to several additional file formats supported by the [CAD Exchanger](http://cadexchanger.com/) application. See the CAD Exchanger website for details on support of these formats.
 
