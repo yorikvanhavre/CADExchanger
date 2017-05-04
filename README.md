@@ -1,5 +1,7 @@
 ## CAD Exchanger addon for FreeCAD
 
+![example](https://forum.freecadweb.org/download/file.php?id=37230)
+
 This addons allows [FreeCAD](http//www.freecadweb.org) to import and export to several additional file formats supported by the [CAD Exchanger](http://cadexchanger.com/) application. See the CAD Exchanger website for details on support of these formats.
 
 CAD Exchanger is a paid application, it must be purchased on their website (a free 30-day evaluation is available). It allows to import and export to several commercial file formats such as Rhino 3dm or ACIS sat into/from FreeCAD.
