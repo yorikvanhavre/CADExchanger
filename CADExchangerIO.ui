@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>429</width>
-    <height>521</height>
+    <width>431</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,6 +106,9 @@
         </property>
         <property name="prefEntry" stdset="0">
          <cstring>ExportAcis</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/CADExchanger</cstring>
         </property>
        </widget>
       </item>
@@ -382,6 +385,19 @@
       <string>Note: FreeCAD needs to be restarted to apply the changes</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
