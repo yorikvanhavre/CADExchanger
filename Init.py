@@ -26,21 +26,21 @@ converter = preferences.GetString("ConverterPath","")
 
 if converter:
     if preferences.GetBool("ImportStep",False):
-        FreeCAD.addImportType("STEP (CAD Exchanger) (*.stp, *.step)","CADExchangerIO")
+        FreeCAD.addImportType("STEP (CAD Exchanger) (*.stp *.step)","CADExchangerIO")
     if preferences.GetBool("ExportStep",False):
-        FreeCAD.addExportType("STEP (CAD Exchanger) (*.stp, *.step)","CADExchangerIO")
+        FreeCAD.addExportType("STEP (CAD Exchanger) (*.stp *.step)","CADExchangerIO")
     if preferences.GetBool("ImportIges",False):
-        FreeCAD.addImportType("IGES (CAD Exchanger) (*.igs, *.iges)","CADExchangerIO")
+        FreeCAD.addImportType("IGES (CAD Exchanger) (*.igs *.iges)","CADExchangerIO")
     if preferences.GetBool("ExportIges",False):
-        FreeCAD.addExportType("IGES (CAD Exchanger) (*.igs, *.iges)","CADExchangerIO")
+        FreeCAD.addExportType("IGES (CAD Exchanger) (*.igs *.iges)","CADExchangerIO")
     if preferences.GetBool("ImportAcis",False):
         FreeCAD.addImportType("ACIS/SAT (CAD Exchanger) (*.sat)","CADExchangerIO")
     if preferences.GetBool("ExportAcis",False):
         FreeCAD.addExportType("ACIS/SAT (CAD Exchanger) (*.sat)","CADExchangerIO")
     if preferences.GetBool("ImportParasolid",False):
-        FreeCAD.addImportType("Parasolid-XT (CAD Exchanger) (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)","CADExchangerIO")
+        FreeCAD.addImportType("Parasolid-XT (CAD Exchanger) (*.x_t *.x_b *.xmt_txt *.xmt_bin)","CADExchangerIO")
     if preferences.GetBool("ExportParasolid",False):
-        FreeCAD.addExportType("Parasolid-XT (CAD Exchanger) (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)","CADExchangerIO")
+        FreeCAD.addExportType("Parasolid-XT (CAD Exchanger) (*.x_t *.x_b *.xmt_txt *.xmt_bin)","CADExchangerIO")
     if preferences.GetBool("ImportJt",False):
         FreeCAD.addImportType("JT (CAD Exchanger) (*.jt)","CADExchangerIO")
     if preferences.GetBool("ExportJt",False):
