@@ -20,6 +20,8 @@
 #*                                                                         *
 #***************************************************************************
 
+from __future__ import print_function
+
 __title__="FreeCAD CAD Exchanger importer/exporter"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
@@ -128,7 +130,7 @@ def insert(filename,docname):
     FreeCAD.ActiveDocument = doc
     tempname = tempfile.mkstemp(suffix=".brep")[1]
     exstr = [converter, " -i ", filename, " -e ", tempname]
-    print "executing "+"".join(exstr)
+    print ("executing "+"".join(exstr))
     result = subprocess.call(exstr)
     if result != 0:
         FreeCAD.Console.PrintError(translate("CADExchanger","Error during CAD Exchanger conversion\n"))
@@ -156,7 +158,7 @@ def export(exportList,filename):
     tempname = tempfile.mkstemp(suffix=".brep")[1]
     Part.export(exportList,tempname)
     exstr = [converter, " -i ", tempname, " -e ", filename]
-    print "executing "+"".join(exstr)
+    print ("executing "+"".join(exstr))
     result = subprocess.call(exstr)
     if result != 0:
         FreeCAD.Console.PrintError(translate("CADExchanger","Error during CAD Exchanger conversion\n"))
