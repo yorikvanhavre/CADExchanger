@@ -111,7 +111,7 @@ def open(filename):
 
 
 
-def insert(filename,docname):
+def insert(filename,docname,returnpath=False):
 
 
     "called on importing a file in an existing document"
@@ -135,8 +135,11 @@ def insert(filename,docname):
     if result != 0:
         FreeCAD.Console.PrintError(translate("CADExchanger","Error during CAD Exchanger conversion\n"))
         return
-    import Part
-    Part.show(Part.read(tempname))
+    if returnpath:
+        return tempname
+    else:
+        import Part
+        Part.show(Part.read(tempname))
 
     return doc
 
