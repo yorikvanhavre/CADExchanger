@@ -26,7 +26,7 @@ __title__="FreeCAD CAD Exchanger importer/exporter"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
 
-import subprocess,tempfile,os,FreeCAD
+import subprocess,tempfile,os,FreeCAD,sys
 
 preferences = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/CADExchanger")
 converter = preferences.GetString("ConverterPath","")
@@ -103,7 +103,9 @@ def open(filename):
     "called by FreeCAD on opening a file"
 
 
-    docname = (os.path.splitext(os.path.basename(filename))[0]).encode("utf8")
+    docname = (os.path.splitext(os.path.basename(filename))[0])
+    if sys.version_info.major < 3:
+        docname = docname.encode("utf8")
     doc = FreeCAD.newDocument(docname)
     doc.Label = docname
     FreeCAD.ActiveDocument = doc
