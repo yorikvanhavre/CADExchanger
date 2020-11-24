@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
-    <height>516</height>
+    <width>459</width>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CAD Exchanger</string>
+   <string>CADExchanger</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label_14">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The options below will enable a series of file formats supported by the &lt;a href=&quot;http://cadexchanger.com/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;CAD Exchanger&lt;/span&gt;&lt;/a&gt; application. You need to have CAD Exchanger installed on this computer for the settings below to take effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>The CADExchanger add-on adds a series of commercial CAD file formats supported by CADExchanger to FreeCAD's File-&gt;Open, File-&gt;Import and File-&gt;Export menus. You need the CADEXchanger GUI or CLI application installed on this computer and the path below correctly set:</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -25,18 +25,25 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CADExchanger homepage: &lt;a href=&quot;https://cadexchanger.com&quot;&gt;https://cadexchanger.com&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of supported file formats: &lt;a href=&quot;https://cadexchanger.com/formats&quot;&gt;https://cadexchanger.com/formats&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Program location</string>
+      <string>Location of the CADExchanger converter application (ExchangerConv):</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Location of the CAD Exchanger converter application (ExchangerConv):</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="Gui::PrefFileChooser" name="fileChooser">
         <property name="prefEntry" stdset="0">
@@ -51,338 +58,12 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Enabled extensions</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="7" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_14">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportObj</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_5">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportAcis</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>STL (*.stl)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Parasolid-XT (*.x_t, *.x_b, *.xmt_txt, *.xmt_bin)</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_6">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportAcis</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>IGES (*.igs, *.iges)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_18">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportVrml</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_7">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportParasolid</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>JT (*.jt)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>Wavefront (*.obj)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_12">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportRhino</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Rhinoceros (*.3dm)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_20">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportX3d</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_3">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportStep</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportIges</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_2">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportIges</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>X3D (*.x3d)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>STEP (*.stp, *.step)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>ACIS-SAT (*.sat, *.sab)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_4">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportStep</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_8">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportParasolid</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>VRML (*.wrl)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_15">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportStl</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_16">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportStl</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_9">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportJt</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="Gui::PrefCheckBox" name="checkBox_10">
-        <property name="text">
-         <string>Export</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ExportJt</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_11">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportRhino</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_13">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportObj</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="1">
-       <widget class="Gui::PrefCheckBox" name="checkBox_17">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>ImportVrml</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/CADExchanger</cstring>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_13">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Note: FreeCAD needs to be restarted to apply the changes</string>
+      <string>FreeCAD needs to be restarted after any change of the path above to see the new file formats</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -410,11 +91,6 @@
   <customwidget>
    <class>Gui::PrefFileChooser</class>
    <extends>Gui::FileChooser</extends>
-   <header>Gui/PrefWidgets.h</header>
-  </customwidget>
-  <customwidget>
-   <class>Gui::PrefCheckBox</class>
-   <extends>QCheckBox</extends>
    <header>Gui/PrefWidgets.h</header>
   </customwidget>
  </customwidgets>

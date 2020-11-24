@@ -1,45 +1,39 @@
-## CAD Exchanger Addon for FreeCAD
+## CADExchanger Addon for FreeCAD
 
-This addons allows [FreeCAD](https://www.freecadweb.org) to import and export to several additional file formats supported by the CAD Exchanger application (refer to the [CAD Exchanger](https://cadexchanger.com/) website for details on support of these formats).
+This addon allows [FreeCAD](https://www.freecadweb.org) to import and export to all the commercial CAD file formats supported by [CADExchanger](https://cadexchanger.com/).
 
 ![screenshot](https://forum.freecadweb.org/download/file.php?id=37230)
 
 ## Description
-CAD Exchanger is a paid application, it must be purchased on their website (a free 30-day evaluation is available). It allows to import and export to several commercial file formats such as Rhino 3dm or ACIS sat into/from FreeCAD.
+[CADExchanger](https://cadexchanger.com) is a multi-platform (Windows, MacOS and Linux) commercial, paid application, it must be purchased on their website (a free 30-day evaluation is available). This add-on uses CADEXchanger under the hood to allow FreeCAD to open, import and export to several commercial file formats such as Solidworks, Catia, Siemens NX, Autodesk DWG and many more. See the full list of [supported file formats](https://cadexchanger.com/formats).
 
 ## Installation
-This addon can be installed via FreeCAD's [Addon Manager](https://github.com/FreeCAD/FreeCAD-addons#installing) (available in FreeCAD >= v0.17) or via the [addons installer macro](https://github.com/FreeCAD/FreeCAD-addons) for older versions.
-
-It can also simply be installed manually by downloading and copying the contents of this repository into a "CADExchanger" folder inside your ``~/FreeCAD/Mod` directory.
-
-Once this addon is installed, and CAD Exchanger installed on your system, you can access its preference page from FreeCAD, menu `Edit > Preferences > Import/Export > CAD Exchanger`. You must then set the path to your `ExchangerConv` or `ExchangerConv.exe` executable for the plugin to work. You can also choose which file extension will be enabled.
+1. Download and install the 30-day trial version of the [CADExchanger GUI application](https://cadexchanger.com/products/gui) or buy a license
+2. Install this add-on via the FreeCAD [Addons Manager](https://wiki.freecadweb.org/Std_AddonMgr) found under menu *Tools -> Addons Manager*
+3. Restart FreeCAD
+4. Under menu *Edit -> Preferences -> Import/Export -> CADExchanger*, set the correct path to your ExchangerConv (Linux and MacOS) or ExchangerConv.exe (Windows) file that is bundled together with the CADExchanger GUI application
+5. Restart FreeCAD once again to see the new file formats added to *File -> Open*, *File -> Import* and *File -> Export* menus
 
 ## Usage
-On opening a CAD Exchanger-supported file, the `ExchangerConv` will be run to convert the given file into a `brep` file, which is `OpenCasCade` (and therefore FreeCAD's) native file format. This `brep` file is then loaded into FreeCAD. The same goes for export, the FreeCAD document is saved to the `brep` format and then converted to the desired file format.
+On opening or importing a CADExchanger-supported file, the `ExchangerConv` utility will be run to convert the given file into a BREP file, which is OpenCasCade (and therefore FreeCAD's) native geometry format. This BREP file is then loaded into FreeCAD. The same goes for export, the FreeCAD document is saved to a BREP file and then converted to the desired file format using `ExchangerConv`.
 
-CAD Exchanger supports several mesh-based formats as well (like OBJ and STL). Upon import, these meshes will also be turned into brep geometry.
+CADExchanger supports several mesh-based formats as well (like OBJ and STL). Upon import, these meshes will also be turned into BREP geometry.
 
 ### Troubleshooting
 
-When you run any of the cadexchanger supported operations, you will see in the report window of FreeCAD a line like this:
+When you run any of the CADExchanger supported operations (open, import or export), you will see in the report window of FreeCAD a line like this:
 
 ```
 executing /home/yorik/cadexchanger/bin/exchangerconv -i /tmp/tmpc0fkp6e8.brep -e /home/yorik/test.obj
 ```
 
-If you see the "Error during CAD Exchanger conversion" message, it is because running that command did return an error.
-you can run that command (everything after the "executing" word) in a terminal, and see for yourself what happens.
-You can also run it inside the python console of FreeCAD like this:
+If you see the "Error during CADExchanger conversion" message, it is because running that command did not run successfully. If CADExchanger printed any error message, you will see it below the above message. 
 
-```
-import subprocess
-subprocess.call("/home/yorik/cadexchanger/bin/exchangerconv -i /tmp/tmpc0fkp6e8.brep -e /home/yorik/test.obj".split(" "))
-```
+You can run the above command (everything after the "executing" word) manually in a terminal window, This can give you additional error messages and a better idea of why the command failed.
 
-if it returns 0, it means the command ran successfully.
-But running in the terminal is better, because `subprocess.call` won't let you see the internal messages that `cadexchangerconv` prints, only the result.
+Running `/home/yorik/cadexchanger/bin/exchangerconv`alone, without arguments, will print a help text and show you the available options.
 
-This can give you a better idea of why `exchangerconv` failed.
+
 
 ## Feedback
 Further discussions about this Addon will get better exposure when posting to its [dedicated FreeCAD forum thread](). Please include version of FreeCAD and make sure you are running the most up to date version of the Addon.
@@ -48,3 +42,7 @@ Further discussions about this Addon will get better exposure when posting to it
 Yorik Van Havre AKA [@yorikvanhavre](http://github.com/yorikvanhavre)
 
 ## License
+
+This add-on is licensed under the [LGPL2+](LICENSE.md) terms, but the CADExchanger application is not part of this license and uses its own [commercial license](https://cadexchanger.com/blog/cad-exchanger-gui-licensing-explained) terms.
+
+ 

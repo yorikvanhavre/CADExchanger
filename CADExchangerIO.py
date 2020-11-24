@@ -26,59 +26,81 @@ __title__="FreeCAD CAD Exchanger importer/exporter"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
 
-import subprocess,tempfile,os,FreeCAD,sys
+import os
+import sys
+import subprocess
+import tempfile
+import platform
+import FreeCAD
 
-preferences = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/CADExchanger")
-converter = preferences.GetString("ConverterPath","")
+builtins = ["step","iges","brep"] # a list of filetypes we don't want to handle with CADExchanger
 
-if FreeCAD.GuiUp:
-    from PySide import QtCore, QtGui
-    # Qt tanslation handling
-    try:
-        _encoding = QtGui.QApplication.UnicodeUTF8
-        def translate(context, text, disambig=None):
-            return QtGui.QApplication.translate(context, text, disambig, _encoding)
-    except AttributeError:
-        def translate(context, text, disambig=None):
-            return QtGui.QApplication.translate(context, text, disambig)
-else:
-    def translate(ctxt,txt):
+
+def translate(ctx,txt):
+
+    """Convenience Qt translate() wrapper"""
+
+    if FreeCAD.GuiUp:
+        from PySide import QtCore, QtGui
+        try:
+            _encoding = QtGui.QApplication.UnicodeUTF8
+            return QtGui.QApplication.translate(ctx, txt, None, _encoding)
+        except AttributeError:
+            return QtGui.QApplication.translate(ctx, txt, None)
+    else:
         return txt
 
 
+def getConverter():
+
+    """Returns the path to the ExchangerConv executable, if set in preferences or autolocated"""
+
+    # look in preferences
+    preferences = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/CADExchanger")
+    converter = preferences.GetString("ConverterPath","")
+    if not converter:
+        # try autolocating
+        from distutils import spawn
+        for prog in ["ExchangerConv","ExchangerConv.exe"]:
+            loc = spawn.find_executable(prog)
+            if loc:
+                converter = loc
+                preferences.SetString("ConverterPath",converter)
+                break
+    if subprocess.call(converter) != 1:
+        return None
+    return converter
+
+
 def addPreferencePage():
-    
-    
-    "Adds the CAD Exchanger preferences page"
-    
-    
+
+    """Adds the CAD Exchanger preferences page to FreeCAD"""
+
     if FreeCAD.GuiUp:
         import FreeCADGui
         FreeCADGui.addPreferencePage(os.path.join(os.path.dirname(__file__),"CADExchangerIO.ui"),"Import-Export")
 
 
-
 def getExtensions():
 
+    """Returns two dicts representing supported import and export file formats from the ExchangerConv executable"""
 
-    "Get the list of supported file formats from CadExchangerConv executable"
-    # this is currently not used but might prove handy some day...
-
-
+    converter = getConverter()
     if not converter:
-        FreeCAD.Console.PrintError(translate("CADExchanger","CAD Exchanger converter path is not set. Please check Preferences -> Import/Export/CAD Exchanger\n"))
-        return
-    if subprocess.call(converter) != 1:
-        FreeCAD.Console.PrintError(translate("CADExchanger","Error while running CAD Exchanger\n"))
         return
     extensions = {}
+    import_extensions = {}
+    export_extensions = {}
     try:
         subprocess.check_output(converter)
     except subprocess.CalledProcessError as e:
-        if e.output.startswith("Usage"):
+        outp = e.output
+        if not isinstance(outp,str):
+            outp = outp.decode("utf8")
+        if outp.startswith("Usage"):
             rec = False
             rest = ""
-            for l in e.output.split("\n"):
+            for l in outp.split("\n"):
                 if rec:
                     if not l:
                         rec = False
@@ -91,17 +113,44 @@ def getExtensions():
                             rest = ""
                 elif "recognized extensions" in l.lower():
                     rec = True
-        else:
-            FreeCAD.Console.PrintError(translate("CADExchanger","Unable to retrieve file extensions from CAD Exchanger\n"))
-    return extensions
+                elif l.lower().startswith("import formats"):
+                    fmts = [f.strip() for f in l.split(":")[1].split(",")]
+                    #print(len(fmts),"import formats:",fmts)
+                    for fmt in fmts:
+                        for key in extensions.keys():
+                            if (fmt.lower() in key.lower()) and (fmt.lower() not in builtins):
+                                import_extensions[key] = extensions[key]
+                elif l.lower().startswith("export formats"):
+                    fmts = [f.strip() for f in l.split(":")[1].split(",")]
+                    #print(len(fmts),"export formats:",fmts)
+                    for fmt in fmts:
+                        for key in extensions.keys():
+                            if (fmt.lower() in key.lower()) and (fmt.lower() not in builtins):
+                                export_extensions[key] = extensions[key]
 
+        else:
+            FreeCAD.Console.PrintError(translate("CADExchanger","Unable to retrieve file extensions from CADExchanger\n"))
+    #print(len(import_extensions),"import:",import_extensions)
+    #print(len(export_extensions),"export:",export_extensions)
+    if not import_extensions or not export_extensions:
+        FreeCAD.Console.PrintError(translate("CADExchanger","Unable to retrieve import/export filters from CADExchanger\n"))
+    return import_extensions,export_extensions
+
+
+def addExtensions():
+
+    """Adds the CADExchanger extensions to FreeCAD"""
+
+    importfmts,exportfmts = getExtensions()
+    for key,value in importfmts.items():
+        FreeCAD.addImportType(key+" ("+value+")","CADExchangerIO")
+    for key,value in exportfmts.items():
+        FreeCAD.addExportType(key+" ("+value+")","CADExchangerIO")
 
 
 def open(filename):
 
-
-    "called by FreeCAD on opening a file"
-
+    """Called by FreeCAD on opening a file"""
 
     docname = (os.path.splitext(os.path.basename(filename))[0])
     if sys.version_info.major < 3:
@@ -112,18 +161,13 @@ def open(filename):
     return insert(filename,doc.Name)
 
 
-
 def insert(filename,docname,returnpath=False):
 
+    """Called by FreeCAD on importing a file in an existing document"""
 
-    "called on importing a file in an existing document"
-
-
+    converter = getConverter()
     if not converter:
         FreeCAD.Console.PrintError(translate("CADExchanger","CAD Exchanger converter path is not set. Please check Preferences -> Import/Export/CAD Exchanger\n"))
-        return
-    if subprocess.call(converter) != 1:
-        FreeCAD.Console.PrintError(translate("CADExchanger","Error while running CAD Exchanger\n"))
         return
     try:
         doc = FreeCAD.getDocument(docname)
@@ -131,11 +175,17 @@ def insert(filename,docname,returnpath=False):
         doc = FreeCAD.newDocument(docname)
     FreeCAD.ActiveDocument = doc
     tempname = tempfile.mkstemp(suffix=".brep")[1]
-    exstr = [converter, " -i ", filename, " -e ", tempname]
+    #exstr = [converter, " -i ", filename, " -e ", tempname]
+    exstr = [converter, " -i \"", filename, "\" -e \"", tempname, "\""]
     print ("executing "+"".join(exstr))
-    result = subprocess.call(exstr)
-    if result != 0:
-        FreeCAD.Console.PrintError(translate("CADExchanger","Error during CAD Exchanger conversion\n"))
+    #result = subprocess.call(exstr)
+    result = subprocess.Popen("".join(exstr), shell=True, stdout=subprocess.PIPE)
+    stdout = result.communicate()[0]
+    if result.returncode != 0:
+        FreeCAD.Console.PrintError(translate("CADExchanger","Error during CADExchanger conversion\n"))
+        if not isinstance(stdout,str):
+            stdout = stdout.decode("utf8")
+        print('CADExchanger output:\n' + stdout)
         return
     if returnpath:
         return tempname
@@ -146,25 +196,26 @@ def insert(filename,docname,returnpath=False):
     return doc
 
 
-
 def export(exportList,filename):
 
+    """Called by FreeCAD on exporting a file"""
 
-    "called on exporting a file"
+    import Part
 
-
+    converter = getConverter()
     if not converter:
         FreeCAD.Console.PrintError(translate("CADExchanger","CAD Exchanger converter path is not set. Please check Preferences -> Import/Export/CAD Exchanger\n"))
         return
-    if subprocess.call(converter) != 1:
-        FreeCAD.Console.PrintError(translate("CADExchanger","Error while running CAD Exchanger\n"))
-        return
-    import Part
     tempname = tempfile.mkstemp(suffix=".brep")[1]
     Part.export(exportList,tempname)
-    exstr = [converter, " -i ", tempname, " -e ", filename]
+    exstr = [converter, " -i \"", tempname, "\" -e \"", filename, "\""]
     print ("executing "+"".join(exstr))
-    result = subprocess.call(exstr)
-    if result != 0:
-        FreeCAD.Console.PrintError(translate("CADExchanger","Error during CAD Exchanger conversion\n"))
+    #result = subprocess.call(exstr)
+    result = subprocess.Popen("".join(exstr), shell=True, stdout=subprocess.PIPE)
+    stdout = result.communicate()[0]
+    if result.returncode != 0:
+        FreeCAD.Console.PrintError(translate("CADExchanger","Error during CADExchanger conversion\n"))
+        if not isinstance(stdout,str):
+            stdout = stdout.decode("utf8")
+        print('CADExchanger output:\n' + stdout)
     return
