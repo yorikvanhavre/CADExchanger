@@ -2,7 +2,7 @@
 
 This addon allows [FreeCAD](https://www.freecadweb.org) to import and export to all the commercial CAD file formats supported by [CADExchanger](https://cadexchanger.com/).
 
-![screenshot](https://forum.freecadweb.org/download/file.php?id=37230)
+![screenshot](screenshot.png)
 
 ## Description
 [CADExchanger](https://cadexchanger.com) is a multi-platform (Windows, MacOS and Linux) commercial, paid application, it must be purchased on their website (a free 30-day evaluation is available). This add-on uses CADEXchanger under the hood to allow FreeCAD to open, import and export to several commercial file formats such as Solidworks, Catia, Siemens NX, Autodesk DWG and many more. See the full list of [supported file formats](https://cadexchanger.com/formats).
