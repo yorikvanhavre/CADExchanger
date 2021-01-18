@@ -36,7 +36,7 @@ Running `/home/yorik/cadexchanger/bin/exchangerconv`alone, without arguments, wi
 
 
 ## Feedback
-Further discussions about this Addon will get better exposure when posting to its [dedicated FreeCAD forum thread](). Please include version of FreeCAD and make sure you are running the most up to date version of the Addon.
+Further discussions about this Addon will get better exposure when posting to its [dedicated FreeCAD forum thread](https://forum.freecadweb.org/viewtopic.php?f=9&t=22227&p=462421). Please include version of FreeCAD and make sure you are running the most up to date version of the Addon.
 
 ## Developer
 Yorik Van Havre AKA [@yorikvanhavre](http://github.com/yorikvanhavre)
