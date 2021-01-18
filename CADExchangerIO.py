@@ -33,8 +33,11 @@ import tempfile
 import platform
 import FreeCAD
 
-builtins = ["step","iges","brep"] # a list of filetypes we don't want to handle with CADExchanger
+# a list of filetypes we don't want to handle with CADExchanger
+builtins = ["step","iges","brep"]
 
+# Save the native open function to avoid collisions with the function declared here
+if open.__module__ in ['__builtin__', 'io']: pythonopen = open
 
 def translate(ctx,txt):
 
@@ -67,7 +70,8 @@ def getConverter():
                 converter = loc
                 preferences.SetString("ConverterPath",converter)
                 break
-    if subprocess.call(converter) != 1:
+    devnull = pythonopen(os.devnull, 'w') # redirect cadexchanger output
+    if subprocess.call(converter,stdout=devnull, stderr=devnull) != 1:
         return None
     return converter
 
