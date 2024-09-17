@@ -32,12 +32,10 @@ import subprocess
 import tempfile
 import platform
 import FreeCAD
+from builtins import open as pyopen
 
 # a list of filetypes we don't want to handle with CADExchanger
-builtins = ["step","iges","brep"]
-
-# Save the native open function to avoid collisions with the function declared here
-if open.__module__ in ['__builtin__', 'io']: pythonopen = open
+BUILTINS = ["step","iges","brep"]
 
 def translate(ctx,txt):
 
@@ -70,7 +68,9 @@ def getConverter():
                 converter = loc
                 preferences.SetString("ConverterPath",converter)
                 break
-    devnull = pythonopen(os.devnull, 'w') # redirect cadexchanger output
+    if not converter:
+        return None
+    devnull = pyopen(os.devnull, 'w') # redirect cadexchanger output
     if subprocess.call(converter,stdout=devnull, stderr=devnull) != 1:
         return None
     return converter
@@ -91,7 +91,7 @@ def getExtensions():
 
     converter = getConverter()
     if not converter:
-        return
+        return None, None
     extensions = {}
     import_extensions = {}
     export_extensions = {}
@@ -122,14 +122,14 @@ def getExtensions():
                     #print(len(fmts),"import formats:",fmts)
                     for fmt in fmts:
                         for key in extensions.keys():
-                            if (fmt.lower() in key.lower()) and (fmt.lower() not in builtins):
+                            if (fmt.lower() in key.lower()) and (fmt.lower() not in BUILTINS):
                                 import_extensions[key] = extensions[key]
                 elif l.lower().startswith("export formats"):
                     fmts = [f.strip() for f in l.split(":")[1].split(",")]
                     #print(len(fmts),"export formats:",fmts)
                     for fmt in fmts:
                         for key in extensions.keys():
-                            if (fmt.lower() in key.lower()) and (fmt.lower() not in builtins):
+                            if (fmt.lower() in key.lower()) and (fmt.lower() not in BUILTINS):
                                 export_extensions[key] = extensions[key]
 
         else:
@@ -146,6 +146,8 @@ def addExtensions():
     """Adds the CADExchanger extensions to FreeCAD"""
 
     importfmts,exportfmts = getExtensions()
+    if not importfmts and not exportfmts:
+        return
     for key,value in importfmts.items():
         FreeCAD.addImportType(key+" ("+value+")","CADExchangerIO")
     for key,value in exportfmts.items():
